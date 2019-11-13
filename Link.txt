@@ -1,0 +1,3 @@
+.NET Standard
+https://devblogs.microsoft.com/dotnet/introducing-net-standard/
+
