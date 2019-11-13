@@ -1,3 +1,8 @@
 .NET Standard
 https://devblogs.microsoft.com/dotnet/introducing-net-standard/
 
+Windows Terminal (nachfolger von CMD, Powershell und WSL)
+https://github.com/microsoft/terminal
+
+Original .NET Framework Sourcecode
+https://referencesource.microsoft.com/
