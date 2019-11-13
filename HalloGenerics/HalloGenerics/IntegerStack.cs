@@ -46,4 +46,11 @@ namespace HalloGenerics
             GC.Collect();
         }
     }
+
+    class Dictionary<TKey, TValue> 
+        where TKey : class 
+        where TValue: struct
+    {
+
+    }
 }
