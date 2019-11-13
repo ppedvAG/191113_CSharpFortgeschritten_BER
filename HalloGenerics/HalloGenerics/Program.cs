@@ -75,8 +75,21 @@ namespace HalloGenerics
             GenericStack<string> genericStringStack = new GenericStack<string>();
             genericStringStack.Push("abcde");
 
+
+            MachEtwas(12);
+            MachEtwas<string>("Hallo Welt");
+            MachEtwas(new IntegerStack());
+
+
             Console.WriteLine("---ENDE 😎---");
             Console.ReadKey();
+        }
+
+
+        public static void MachEtwas<T>(T item)
+        {
+            Console.WriteLine($"Ich mache etwas mit: {item}");
+            // $"Die Summe von {++zahl1} und {zahl2++} ist {zahl1 + zahl2}";
         }
     }
 }
