@@ -47,41 +47,47 @@ namespace HalloGenerics
             //} 
             #endregion
 
-            ObjectStack stack = new ObjectStack();
+            #region Eigene Stacks
+            //ObjectStack stack = new ObjectStack();
 
-            stack.Push(12);
-            stack.Push(7);
-            stack.Push("Hallo Welt");
-            stack.Push(33.333333);
+            //stack.Push(12);
+            //stack.Push(7);
+            //stack.Push("Hallo Welt");
+            //stack.Push(33.333333);
 
-            stack.Push(98765.99m); // Vergrößern
+            //stack.Push(98765.99m); // Vergrößern
 
-            Console.WriteLine(stack.Pop());
-            Console.WriteLine(stack.Pop());
-            Console.WriteLine(stack.Pop());
-            Console.WriteLine(stack.Pop());
-            Console.WriteLine(stack.Pop());
+            //Console.WriteLine(stack.Pop());
+            //Console.WriteLine(stack.Pop());
+            //Console.WriteLine(stack.Pop());
+            //Console.WriteLine(stack.Pop());
+            //Console.WriteLine(stack.Pop());
 
-            // Console.WriteLine(stack.Pop()); // Exception
-
-
-            IntegerStack intStack = new IntegerStack();
-            intStack.Push(12);
-
-            GenericStack<int> genericIntStack = new GenericStack<int>();
-            genericIntStack.Push(123);
-            genericIntStack.Pop();
-
-            GenericStack<string> genericStringStack = new GenericStack<string>();
-            genericStringStack.Push("abcde");
+            //// Console.WriteLine(stack.Pop()); // Exception
 
 
+            //IntegerStack intStack = new IntegerStack();
+            //intStack.Push(12);
+
+            //GenericStack<int> genericIntStack = new GenericStack<int>();
+            //genericIntStack.Push(123);
+            //genericIntStack.Pop();
+
+            //GenericStack<string> genericStringStack = new GenericStack<string>();
+            //genericStringStack.Push("abcde");
 
 
-            MachEtwas(12);
-            MachEtwas<string>("Hallo Welt");
-            MachEtwas(new IntegerStack());
+            //MachEtwas(12);
+            //MachEtwas<string>("Hallo Welt");
+            //MachEtwas(new IntegerStack());
+            #endregion
 
+            // Indexer
+
+            IntegerStack iStack = new IntegerStack();
+
+            iStack.Push(12);
+            Console.WriteLine(iStack["Hallo Welt"]);
 
             Console.WriteLine("---ENDE 😎---");
             Console.ReadKey();

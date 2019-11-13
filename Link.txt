@@ -6,3 +6,10 @@ https://github.com/microsoft/terminal
 
 Original .NET Framework Sourcecode
 https://referencesource.microsoft.com/
+
+.NET Decompiler:
+https://github.com/icsharpcode/ILSpy#ilspy-------
+
+C#8 Interfaces:
+https://jeremybytes.blogspot.com/2019/09/a-closer-look-at-c-8-interfaces.html
+

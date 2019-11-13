@@ -45,6 +45,26 @@ namespace HalloGenerics
             data = new int[4];
             GC.Collect();
         }
+
+        // indexer + TAB + TAB
+
+        //public int this[int gesuchterKey]
+        //{
+        //    get 
+        //    {
+        //        for (int i = 0; i < 10000000; i++)
+        //        {
+        //            int hex = 0xFF_00_FF;
+        //            byte maske = 0b_0000_0010;
+        //        }
+        //        for (int i = 0; i < 10_000_000; i++)
+        //        {
+
+        //        }
+        //    }
+        //    set { data[index] = value; }
+        //}
+
     }
 
     class Dictionary<TKey, TValue> 
