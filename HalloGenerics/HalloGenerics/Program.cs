@@ -62,7 +62,18 @@ namespace HalloGenerics
             Console.WriteLine(stack.Pop());
             Console.WriteLine(stack.Pop());
 
-            Console.WriteLine(stack.Pop()); // Exception
+            // Console.WriteLine(stack.Pop()); // Exception
+
+
+            IntegerStack intStack = new IntegerStack();
+            intStack.Push(12);
+
+            GenericStack<int> genericIntStack = new GenericStack<int>();
+            genericIntStack.Push(123);
+            genericIntStack.Pop();
+
+            GenericStack<string> genericStringStack = new GenericStack<string>();
+            genericStringStack.Push("abcde");
 
             Console.WriteLine("---ENDE 😎---");
             Console.ReadKey();
