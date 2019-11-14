@@ -13,8 +13,8 @@ namespace SOLID_Taschenrechner
         static void Main(string[] args)
         {
             var parser = new RegexParser();
-            var rechner = new ModularRechner(new Addition(),new Subtraktion());
-            new KonsolenUI(parser,rechner).Start();
+            var rechner = new ModularRechner(new Addition(), new Subtraktion(), new Division());
+            new KonsolenUI(parser, rechner).Start();
         }
     }
     public struct Formel
@@ -41,11 +41,11 @@ namespace SOLID_Taschenrechner
         public Formel Parse(string input)
         {
             var result = regex.Match(input);
-            if(result.Success)
+            if (result.Success)
             {
                 Formel output = new Formel();
                 output.Operand1 = Convert.ToInt32(result.Groups[1].Value);
-                output.Operator = result.Groups[2].Value;
+                output.Operator = result.Groups[2].Value.Trim();
                 output.Operand2 = Convert.ToInt32(result.Groups[3].Value);
 
                 return output;
@@ -56,7 +56,7 @@ namespace SOLID_Taschenrechner
     }
 
     public class StringSplitParser : IParser
-    { 
+    {
         public Formel Parse(string input)
         {
             string[] parts = input.Split();
@@ -99,7 +99,7 @@ namespace SOLID_Taschenrechner
         public int Berechne(Formel input)
         {
             //LINQ
-            var rechenart = unterstützteRechenarten.FirstOrDefault(x => x.Operator == input.Operator);
+            var rechenart = unterstützteRechenarten.FirstOrDefault(x => x.Operator.Any(op => op == input.Operator));
             if (rechenart == null)
             {
                 // ToDo: User darf sich den Operator selber aussuchen, da keiner Matcht
@@ -112,7 +112,7 @@ namespace SOLID_Taschenrechner
 
     public interface IRechenart
     {
-        string Operator { get; }
+        string[] Operator { get; }
 
         int Rechne(int z1, int z2);
     }
@@ -120,7 +120,7 @@ namespace SOLID_Taschenrechner
     public class Addition : IRechenart
     {
         // ReadOnly-Property
-        public string Operator => "+";
+        public string[] Operator => new string[] { "+" };
         public int Rechne(int z1, int z2) => z1 + z2;
         //{
         //    return z1 + z2;
@@ -129,11 +129,23 @@ namespace SOLID_Taschenrechner
     public class Subtraktion : IRechenart
     {
         // ReadOnly-Property
-        public string Operator => "-";
+        public string[] Operator => new string[] { "-", "_" };
         public int Rechne(int z1, int z2) => z1 - z2;
         //{
         //    return z1 + z2;
         //}
+    }
+    public class Division : IRechenart
+    {
+        public string[] Operator => new string[] { ":", "/" };
+
+        public int Rechne(int z1, int z2)
+        {
+            if (z2 == 0)
+                throw new DivideByZeroException();
+            else
+                return z1 / z2;
+        }
     }
 
     public class KonsolenUI
