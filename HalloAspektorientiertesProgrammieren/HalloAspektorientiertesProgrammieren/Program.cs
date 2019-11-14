@@ -1,5 +1,6 @@
 ﻿using Data;
 using Domain;
+using Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,7 @@ namespace HalloAspektorientiertesProgrammieren
     {
         static void Main(string[] args)
         {
-
-            EFRepository repo = new EFRepository(new EFContext());
+            IRepository repo = new LoggingRepository(new EFRepository(new EFContext()));
 
 
             Person p1 = new Person();
