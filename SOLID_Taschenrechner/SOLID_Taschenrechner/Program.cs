@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SOLID_Taschenrechner
@@ -11,7 +12,9 @@ namespace SOLID_Taschenrechner
         // Bootstrapping -> Initialisieren der Logik
         static void Main(string[] args)
         {
-            new KonsolenUI().Start();
+            var parser = new RegexParser();
+            var rechner = new SimplerRechner();
+            new KonsolenUI(parser,rechner).Start();
         }
     }
     public struct Formel
@@ -21,8 +24,39 @@ namespace SOLID_Taschenrechner
         public string Operator { get; set; }
     }
 
-    public class StringSplitParser
+    public interface IParser
     {
+        Formel Parse(string input);
+    }
+
+    public class RegexParser : IParser
+    {
+        // https://regexr.com
+        public RegexParser(string pattern = @"(-?\d+)\s*(\D+)\s*(-?\d+)")
+        {
+            regex = new Regex(pattern);
+        }
+        private readonly Regex regex;
+
+        public Formel Parse(string input)
+        {
+            var result = regex.Match(input);
+            if(result.Success)
+            {
+                Formel output = new Formel();
+                output.Operand1 = Convert.ToInt32(result.Groups[1].Value);
+                output.Operator = result.Groups[2].Value;
+                output.Operand2 = Convert.ToInt32(result.Groups[3].Value);
+
+                return output;
+            }
+            else
+                throw new FormatException("Ihre Eingabe ist leider keine gültige Formel");
+        }
+    }
+
+    public class StringSplitParser : IParser
+    { 
         public Formel Parse(string input)
         {
             string[] parts = input.Split();
@@ -35,7 +69,11 @@ namespace SOLID_Taschenrechner
         }
     }
 
-    public class SimplerRechner
+    public interface IRechner
+    {
+        int Berechne(Formel input);
+    }
+    public class SimplerRechner : IRechner
     {
         public int Berechne(Formel input)
         {
@@ -51,6 +89,15 @@ namespace SOLID_Taschenrechner
 
     public class KonsolenUI
     {
+        public KonsolenUI(IParser parser, IRechner rechner)
+        {
+            this.parser = parser ?? throw new ArgumentNullException(nameof(parser));
+            this.rechner = rechner ?? throw new ArgumentNullException(nameof(rechner));
+        }
+
+        private IParser parser;
+        private IRechner rechner;
+
         public void Start()
         {
             // I/O
@@ -58,12 +105,10 @@ namespace SOLID_Taschenrechner
             string eingabe = Console.ReadLine(); // "2 + 2"
 
             // Parsen
-            var parser = new StringSplitParser();
             var formel = parser.Parse(eingabe);
 
             // Rechnen
-            var rechner = new SimplerRechner();
-            var ergebnis = rechner.Berechne(formel);
+            int ergebnis = rechner.Berechne(formel);
 
             //I/O
             Console.WriteLine($"Das Ergebnis ist {ergebnis}");

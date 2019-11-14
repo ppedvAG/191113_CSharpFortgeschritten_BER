@@ -13,3 +13,8 @@ https://github.com/icsharpcode/ILSpy#ilspy-------
 C#8 Interfaces:
 https://jeremybytes.blogspot.com/2019/09/a-closer-look-at-c-8-interfaces.html
 
+Regex - Hilfstool:
+https://regexr.com
+
+Regex für IBAN:
+https://stackoverflow.com/questions/23471591/regex-for-iban-allowing-for-white-spaces-and-checking-for-exact-length
