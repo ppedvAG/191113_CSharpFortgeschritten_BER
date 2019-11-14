@@ -13,7 +13,7 @@ namespace SOLID_Taschenrechner
         static void Main(string[] args)
         {
             var parser = new RegexParser();
-            var rechner = new SimplerRechner();
+            var rechner = new ModularRechner(new Addition(),new Subtraktion());
             new KonsolenUI(parser,rechner).Start();
         }
     }
@@ -85,6 +85,55 @@ namespace SOLID_Taschenrechner
 
             throw new InvalidOperationException($"Operator {input.Operator} ist unbekannt");
         }
+    }
+
+    public class ModularRechner : IRechner
+    {
+        public ModularRechner(params IRechenart[] unterstützteRechenarten)
+        {
+            this.unterstützteRechenarten = unterstützteRechenarten;
+        }
+        private readonly IRechenart[] unterstützteRechenarten;
+
+
+        public int Berechne(Formel input)
+        {
+            //LINQ
+            var rechenart = unterstützteRechenarten.FirstOrDefault(x => x.Operator == input.Operator);
+            if (rechenart == null)
+            {
+                // ToDo: User darf sich den Operator selber aussuchen, da keiner Matcht
+                throw new InvalidOperationException($"Der Operator {input.Operator} wird leider nicht unterstützt.");
+            }
+            else
+                return rechenart.Rechne(input.Operand1, input.Operand2);
+        }
+    }
+
+    public interface IRechenart
+    {
+        string Operator { get; }
+
+        int Rechne(int z1, int z2);
+    }
+
+    public class Addition : IRechenart
+    {
+        // ReadOnly-Property
+        public string Operator => "+";
+        public int Rechne(int z1, int z2) => z1 + z2;
+        //{
+        //    return z1 + z2;
+        //}
+    }
+    public class Subtraktion : IRechenart
+    {
+        // ReadOnly-Property
+        public string Operator => "-";
+        public int Rechne(int z1, int z2) => z1 - z2;
+        //{
+        //    return z1 + z2;
+        //}
     }
 
     public class KonsolenUI
