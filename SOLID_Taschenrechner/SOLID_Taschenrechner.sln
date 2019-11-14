@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOLID_Taschenrechner", "SOLID_Taschenrechner\SOLID_Taschenrechner.csproj", "{EA136D48-BEF0-4147-9B59-086B207553BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{2C2C35A2-B0F0-4400-A15F-DDD1271E1965}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{A862CE9C-6F69-4989-B46D-2A433A6CAA4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRLogic", "TRLogic\TRLogic.csproj", "{009CA1B4-B2F1-40FD-9CD7-CD4467D25A2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeFeatures", "FreeFeatures\FreeFeatures.csproj", "{B69D2B76-292D-4618-AA2E-F485FC53E46D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaidFeatures", "PaidFeatures\PaidFeatures.csproj", "{15E42AFC-E0BD-44EB-B525-AAA36DE54439}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +25,30 @@ Global
 		{EA136D48-BEF0-4147-9B59-086B207553BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA136D48-BEF0-4147-9B59-086B207553BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA136D48-BEF0-4147-9B59-086B207553BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C2C35A2-B0F0-4400-A15F-DDD1271E1965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C2C35A2-B0F0-4400-A15F-DDD1271E1965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C2C35A2-B0F0-4400-A15F-DDD1271E1965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C2C35A2-B0F0-4400-A15F-DDD1271E1965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009CA1B4-B2F1-40FD-9CD7-CD4467D25A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009CA1B4-B2F1-40FD-9CD7-CD4467D25A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009CA1B4-B2F1-40FD-9CD7-CD4467D25A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009CA1B4-B2F1-40FD-9CD7-CD4467D25A2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B69D2B76-292D-4618-AA2E-F485FC53E46D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69D2B76-292D-4618-AA2E-F485FC53E46D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69D2B76-292D-4618-AA2E-F485FC53E46D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69D2B76-292D-4618-AA2E-F485FC53E46D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E42AFC-E0BD-44EB-B525-AAA36DE54439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E42AFC-E0BD-44EB-B525-AAA36DE54439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E42AFC-E0BD-44EB-B525-AAA36DE54439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E42AFC-E0BD-44EB-B525-AAA36DE54439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{009CA1B4-B2F1-40FD-9CD7-CD4467D25A2A} = {A862CE9C-6F69-4989-B46D-2A433A6CAA4B}
+		{B69D2B76-292D-4618-AA2E-F485FC53E46D} = {A862CE9C-6F69-4989-B46D-2A433A6CAA4B}
+		{15E42AFC-E0BD-44EB-B525-AAA36DE54439} = {A862CE9C-6F69-4989-B46D-2A433A6CAA4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36F643D4-C424-46B6-8D03-7E8F7DCDFA6C}

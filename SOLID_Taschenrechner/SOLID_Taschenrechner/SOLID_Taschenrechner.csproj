@@ -43,11 +43,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KonsolenUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{2C2C35A2-B0F0-4400-A15F-DDD1271E1965}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FreeFeatures\FreeFeatures.csproj">
+      <Project>{B69D2B76-292D-4618-AA2E-F485FC53E46D}</Project>
+      <Name>FreeFeatures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaidFeatures\PaidFeatures.csproj">
+      <Project>{15E42AFC-E0BD-44EB-B525-AAA36DE54439}</Project>
+      <Name>PaidFeatures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TRLogic\TRLogic.csproj">
+      <Project>{009CA1B4-B2F1-40FD-9CD7-CD4467D25A2A}</Project>
+      <Name>TRLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
