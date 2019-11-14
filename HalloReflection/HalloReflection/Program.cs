@@ -28,6 +28,7 @@ namespace HalloReflection
 
             // Zur Laufzeit eine Assembly(exe oder dll) laden
             Assembly geladen = Assembly.LoadFrom("Rechner.dll");
+            // Assembly.Load()
             var allTypes = geladen.GetTypes();          // alle holen
             Type TaschenrechnerTyp = geladen.GetType("Rechner.Taschenrechner");  // Wenn man den namen kennt ;)
 
