@@ -13,8 +13,12 @@ namespace HalloAspektorientiertesProgrammieren
     {
         static void Main(string[] args)
         {
-            IRepository repo = new LoggingRepository(new EFRepository(new EFContext()));
+            IRepository repo = new AuthRepository(
+                                    new LoggingRepository(new EFRepository(new EFContext())),
+                                    User.User);
 
+            // Mit Frameworks zb auch so :
+            // new EFRepository().WithLogger().WithAuth();
 
             Person p1 = new Person();
             p1.Vorname = "Tom";
