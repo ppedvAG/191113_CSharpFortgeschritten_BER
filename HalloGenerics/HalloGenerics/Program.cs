@@ -84,10 +84,12 @@ namespace HalloGenerics
 
             // Indexer
 
-            IntegerStack iStack = new IntegerStack();
+            //IntegerStack iStack = new IntegerStack();
 
-            iStack.Push(12);
-            Console.WriteLine(iStack["Hallo Welt"]);
+            //iStack.Push(12);
+            //Console.WriteLine(iStack["Hallo Welt"]);
+
+
 
             Console.WriteLine("---ENDE 😎---");
             Console.ReadKey();
