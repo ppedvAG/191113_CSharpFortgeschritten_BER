@@ -10,6 +10,11 @@ namespace HalloAspektorientiertesProgrammieren
     {
         static void Main(string[] args)
         {
+
+
+
+            Console.WriteLine("---ENDE---");
+            Console.ReadKey();
         }
     }
 }
