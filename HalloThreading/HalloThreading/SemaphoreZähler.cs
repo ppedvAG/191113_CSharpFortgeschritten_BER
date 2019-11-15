@@ -12,7 +12,6 @@ namespace HalloThreading
         private Semaphore semaphore = new Semaphore(5, 5);
         private int zähler = 0;
 
-
         public void Machwas(object parameter)
         {
             semaphore.WaitOne();
