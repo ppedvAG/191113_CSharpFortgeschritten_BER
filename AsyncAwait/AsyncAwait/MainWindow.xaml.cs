@@ -29,11 +29,15 @@ namespace AsyncAwait
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Start");
-            for (int i = 0; i <= 100; i++)
+            Task t1 = Task.Run(() =>
             {
-                Thread.Sleep(100);
-                progressBarWert.Value = i;
-            }
+                for (int i = 0; i <= 100; i++)
+                {
+                    Thread.Sleep(100);
+                    Dispatcher.Invoke(() => progressBarWert.Value = i);
+                }
+            });
+            t1.Wait();
             MessageBox.Show("Ende");
         }
     }
