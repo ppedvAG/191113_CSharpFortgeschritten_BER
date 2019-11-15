@@ -8,7 +8,7 @@
         Title="Async/Await" Height="200" Width="200"
         WindowStartupLocation="CenterScreen">
     <StackPanel Margin="10">
-        <TextBox Margin="10"/>
+        <TextBox x:Name="textBoxWert" Margin="10"/>
         <Button Content="Start !" Margin="10" Click="Button_Click"/>
         <ProgressBar x:Name="progressBarWert" Minimum="0" Maximum="100" Height="50"/>
     </StackPanel>

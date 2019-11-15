@@ -24,27 +24,40 @@ namespace AsyncAwait
         public MainWindow()
         {
             InitializeComponent();
-            TaskIstFertigEvent += TaskIstFertig;
         }
 
-        private void TaskIstFertig(object sender, EventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Ende");
-        }
-
-        public event EventHandler TaskIstFertigEvent;
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+            // UI-Thread
             MessageBox.Show("Start");
-            Task t1 = Task.Run(() =>
+            textBoxWert.Text = "Anfang";
+            await Task.Run(() => // Task-Thread
             {
                 for (int i = 0; i <= 100; i++)
                 {
                     Thread.Sleep(100);
                     Dispatcher.Invoke(() => progressBarWert.Value = i);
                 }
-                TaskIstFertigEvent.Invoke(sender, e);
+            }).ConfigureAwait(false);
+
+            // nach dem await ein wechsel ZURÜCK in den UI-Thread
+            textBoxWert.Text = "Ende";
+
+
+            // t1.Wait(); // Deadlock
+            MessageBox.Show("Ende");
+
+            //string uhrzeit = GetString().Result; // Blockierend
+            //string uhrzeit = await GetString(); // Blockiert nicht !
+            //MessageBox.Show(uhrzeit);
+        }
+
+        private Task<string> GetString()
+        {
+            return Task.Run(() =>
+            {
+                Thread.Sleep(5000);
+                return DateTime.Now.ToLongTimeString();
             });
         }
     }
