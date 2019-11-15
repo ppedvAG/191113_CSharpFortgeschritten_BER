@@ -38,7 +38,7 @@ namespace AsyncAwait
                     Thread.Sleep(100);
                     Dispatcher.Invoke(() => progressBarWert.Value = i);
                 }
-            }).ConfigureAwait(false);
+            }).ConfigureAwait(false); // < --- KEIN WECHSEL IN DEN UI-THREAD !!!!!
 
             // nach dem await ein wechsel ZURÜCK in den UI-Thread
             textBoxWert.Text = "Ende";
