@@ -24,7 +24,15 @@ namespace AsyncAwait
         public MainWindow()
         {
             InitializeComponent();
+            TaskIstFertigEvent += TaskIstFertig;
         }
+
+        private void TaskIstFertig(object sender, EventArgs e)
+        {
+            MessageBox.Show("Ende");
+        }
+
+        public event EventHandler TaskIstFertigEvent;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -36,9 +44,8 @@ namespace AsyncAwait
                     Thread.Sleep(100);
                     Dispatcher.Invoke(() => progressBarWert.Value = i);
                 }
+                TaskIstFertigEvent.Invoke(sender, e);
             });
-            t1.Wait();
-            MessageBox.Show("Ende");
         }
     }
 }
