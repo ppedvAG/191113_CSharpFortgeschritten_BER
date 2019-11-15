@@ -28,28 +28,36 @@ namespace AsyncAwait
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            // UI-Thread
-            MessageBox.Show("Start");
-            textBoxWert.Text = "Anfang";
-            await Task.Run(() => // Task-Thread
-            {
-                for (int i = 0; i <= 100; i++)
-                {
-                    Thread.Sleep(100);
-                    Dispatcher.Invoke(() => progressBarWert.Value = i);
-                }
-            }).ConfigureAwait(false); // < --- KEIN WECHSEL IN DEN UI-THREAD !!!!!
+            #region Async/Await
+            //// UI-Thread
+            //MessageBox.Show("Start");
+            //textBoxWert.Text = "Anfang";
+            //await Task.Run(() => // Task-Thread
+            //{
+            //    for (int i = 0; i <= 100; i++)
+            //    {
+            //        Thread.Sleep(100);
+            //        Dispatcher.Invoke(() => progressBarWert.Value = i);
+            //    }
+            //}).ConfigureAwait(false); // < --- KEIN WECHSEL IN DEN UI-THREAD !!!!!
 
-            // nach dem await ein wechsel ZURÜCK in den UI-Thread
-            textBoxWert.Text = "Ende";
+            //// nach dem await ein wechsel ZURÜCK in den UI-Thread
+            //textBoxWert.Text = "Ende";
 
 
-            // t1.Wait(); // Deadlock
-            MessageBox.Show("Ende");
+            //// t1.Wait(); // Deadlock
+            //MessageBox.Show("Ende");
 
-            //string uhrzeit = GetString().Result; // Blockierend
-            //string uhrzeit = await GetString(); // Blockiert nicht !
-            //MessageBox.Show(uhrzeit);
+            ////string uhrzeit = GetString().Result; // Blockierend
+            ////string uhrzeit = await GetString(); // Blockiert nicht !
+            ////MessageBox.Show(uhrzeit); 
+            #endregion
+
+            // Thread.Sleep(5000);  // Thread blockiert (UI Thread !!!!)
+            await Task.Delay(5000); // Wartet, UI Thread kann in den 5 sec weitermachen !!!
+
+
+            MessageBox.Show("Ich bin fertig");
         }
 
         private Task<string> GetString()
