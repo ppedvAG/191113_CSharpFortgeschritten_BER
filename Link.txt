@@ -21,3 +21,5 @@ https://stackoverflow.com/questions/23471591/regex-for-iban-allowing-for-white-s
 
 PLINQ und EF
 https://stackoverflow.com/questions/41749896/ef-6-how-to-correctly-perform-parallel-queries
+
+MichaelZ@ppedv.at / .de
