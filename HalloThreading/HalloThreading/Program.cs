@@ -10,9 +10,8 @@ namespace HalloThreading
     class Program
     {
         // Delegate-Type
-        public delegate void MachEtwas();
-        public delegate void MachEtwas2(int Zahl);
-
+        // public delegate void MachEtwas();
+        // public delegate void MachEtwas2(int Zahl);
         static void Main(string[] args)
         {
             // Delegaten und Events:
@@ -52,31 +51,111 @@ namespace HalloThreading
             // Für Oberflächen
             //EventHandler eh = MeinButton_Click;
 
-            // Anwendungsfall:
+            #region Anwendungsfall
 
-            Button b = new Button();
+            //Button b = new Button();
 
-            b.ClickEvent += MeinButton_Click;
-            b.ClickEvent += Logger;
+            //b.ClickEvent += MeinButton_Click;
+            //b.ClickEvent += Logger;
 
-            b.Click();
+            //b.Click();
 
-            b.ClickEvent = null;             // absolut verboten !!!!! 
+            //b.ClickEvent = null;             // absolut verboten !!!!! 
 
-            b.Click();
-            b.Click();
-            b.ClickEvent -= Logger;
-            b.Click();
-            b.Click();
+            //b.Click();
+            //b.Click();
+            //b.ClickEvent -= Logger;
+            //b.Click();
+            //b.Click();
 
-            b.ClickEvent.Invoke(null,null); // delegat auslösen : verboten !!!!
-            b.ClickEvent.Invoke(null,null); // delegat auslösen : verboten !!!!
-            b.ClickEvent.Invoke(null,null); // delegat auslösen : verboten !!!!
+            //b.ClickEvent.Invoke(null,null); // delegat auslösen : verboten !!!!
+            //b.ClickEvent.Invoke(null,null); // delegat auslösen : verboten !!!!
+            //b.ClickEvent.Invoke(null,null); // delegat auslösen : verboten !!!! 
+            #endregion
 
+            #region Basisfunktionalität mit Threads
+            //Thread t1 = new Thread(MachEtwas);
+            //t1.Start();
+
+            //Thread t2 = new Thread(MachEtwasMitEinemParameter);
+            //t2.Start("_");
+
+            //Thread.Sleep(5000);
+            //t2.Abort();
+
+            //t1.Join(); // Warten bis t1 fertig ist 
+            #endregion
+
+            #region ThreadPool
+            //ThreadPool.GetAvailableThreads(out int workerThreads, out int portThreads);
+            //Console.WriteLine(workerThreads); 
+            //Console.WriteLine(portThreads); 
+
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,1);
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,2);
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,3);
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,4);
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,5);
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,6);
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,7);
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,8);
+            //ThreadPool.QueueUserWorkItem(MachEtwasMitEinemParameter,9);
+
+            //// Threadpool: Background-Threads
+            #endregion
+
+            Konto meinKonto = new Konto(1000);
+
+            for (int i = 0; i < 100; i++)
+            {
+                ThreadPool.QueueUserWorkItem(ZufälligesKontoupdate,meinKonto);
+            }
 
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
         }
+
+        private static void ZufälligesKontoupdate(object state)
+        {
+            Konto meinKonto = (Konto)state;
+            Random r = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                if (r.Next(0, 2) % 2 == 0)
+                    meinKonto.Abheben(r.Next(0, 1000));
+                else
+                    meinKonto.Einzahlen(r.Next(0, 1000));
+            }
+
+        }
+
+        private static void MachEtwasMitEinemParameter(object item)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                try
+                {
+                    Thread.Sleep(1000);
+                    Console.Write(item);
+                }
+                catch (ThreadAbortException ex)
+                {
+                    Console.WriteLine("Ich mach trotzdem weiter ;)" );
+                    Thread.ResetAbort();
+                }
+            }
+        }
+
+        private static void MachEtwas()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Thread.Sleep(100);
+                Console.Write('#');
+            }
+        }
+
+
 
         private static void Logger(object sender, EventArgs e)
         {
