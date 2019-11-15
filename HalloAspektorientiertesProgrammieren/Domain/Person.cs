@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -17,5 +18,11 @@ namespace Domain
         public string Nachname { get; set; }
         public byte Alter { get; set; }
         public decimal Kontostand { get; set; }
+        // public List<Haustier> Haustiere { get; set; }
+    }
+
+    public class Haustier
+    {
+        public byte Alter { get; set; }
     }
 }

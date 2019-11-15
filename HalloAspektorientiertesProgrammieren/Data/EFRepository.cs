@@ -53,5 +53,14 @@ namespace Data
                 context.Entry(loaded).CurrentValues.SetValues(item);
             }
         }
+
+        public IQueryable<T> Query<T>() where T : Entity
+        {
+            return context.Set<T>();
+        }
+        public void AddRange<T>(IEnumerable<T> items) where T : Entity
+        {
+            context.Set<T>().AddRange(items);
+        }
     }
 }
