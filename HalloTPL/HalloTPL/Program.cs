@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -95,9 +96,52 @@ namespace HalloTPL
             //}
             #endregion
 
+            // JIT:
+            ForTest(10);
+            ParallelTest(10);
+
+            int[] durchgänge = { 1_000, 10_000, 25_000, 50_000, 100_000, 250_000, 500_000, 1_000_000, 5_000_000, 10_000_000, 50_000_000 };
+            Stopwatch watch = new Stopwatch();
+            for (int i = 0; i < durchgänge.Length; i++)
+            {
+                Console.WriteLine($"-------------------Durchgang {durchgänge[i]}------------------------");
+                watch.Restart();
+                ForTest(durchgänge[i]);
+                watch.Stop();
+                Console.WriteLine($"For: {watch.ElapsedMilliseconds}ms");
+
+                watch.Restart();
+                ParallelTest(durchgänge[i]);
+                watch.Stop();
+                Console.WriteLine($"Parallel: {watch.ElapsedMilliseconds}ms");
+            }
+
+            
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
         }
+
+
+        private static void ForTest(int durchgänge)
+        {
+            double[] erg = new double[durchgänge];
+            for (int i = 0; i < durchgänge; i++)
+            {
+                erg[i] = Math.Floor((Math.Pow(i, 0.3333333) * Math.Sqrt(i +20) + Math.Sin(Math.E * i) % 15) / Math.Exp(i) + 5);
+            }
+        }
+
+        private static void ParallelTest(int durchgänge)
+        {
+            double[] erg = new double[durchgänge];
+            Parallel.For(0, durchgänge, new ParallelOptions {MaxDegreeOfParallelism=8 }, i =>
+              {
+                  erg[i] = Math.Floor((Math.Pow(i, 0.3333333) * Math.Sqrt(i + 20) + Math.Sin(Math.E * i) % 15) / Math.Exp(i) + 5);
+              });
+        }
+
+
+
 
         private static string GibUhrzeit()
         {
