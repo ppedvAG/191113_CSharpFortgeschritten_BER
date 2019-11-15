@@ -104,11 +104,39 @@ namespace HalloThreading
             //// Threadpool: Background-Threads
             #endregion
 
-            Konto meinKonto = new Konto(1000);
+            #region Monitor/Lock - Beispiel
+            //Konto meinKonto = new Konto(1000);
 
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    ThreadPool.QueueUserWorkItem(ZufälligesKontoupdate,meinKonto);
+            //} 
+            #endregion
+
+            #region Mutex - Beispiel
+            //bool newInstance;
+            //Mutex mutex = new Mutex(true, "MeinMutex",out newInstance );
+
+            //if(newInstance == false)
+            //{
+            //    Console.WriteLine("Programm läuft bereits, bitte warten !");
+            //    Console.ReadKey();
+            //    return;
+            //}
+
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    bool result = mutex.WaitOne();
+            //        Thread.Sleep(100);
+            //        Console.WriteLine(i);
+            //    mutex.ReleaseMutex();
+            //}
+            #endregion
+
+            SemaphoreZähler sz = new SemaphoreZähler();
             for (int i = 0; i < 100; i++)
             {
-                ThreadPool.QueueUserWorkItem(ZufälligesKontoupdate,meinKonto);
+                ThreadPool.QueueUserWorkItem(sz.Machwas,i);
             }
 
             Console.WriteLine("---ENDE---");
